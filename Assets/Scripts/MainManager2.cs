@@ -8,13 +8,13 @@ using TMPro;
 public class MainManager2 : MonoBehaviour
 {
     public static MainManager2 Instance;
-    public TextMeshProUGUI playerName;
+    private string playerName;
 
     public int playerBestScore;
 
     private void Awake()
     {
-        playerBestScore = 0;
+        
         
         if (Instance != null)
         {
@@ -25,18 +25,29 @@ public class MainManager2 : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    public void SetPlayerName(string name)
+    {
+        playerName = name;
+    }
+    public string GetPlayerName()
+    {
+        return playerName;
+    }
 
     [System.Serializable]
     class SaveData
     {
         public string playerName;
+        public int playerBestScore;
     }
     public void SavePlayerInfo()
     {
         SaveData data = new SaveData();
-        data.playerName = playerName.text;
+        data.playerName = playerName;
+        data.playerBestScore = playerBestScore;
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
+       // Debug.Log("Valeur sauvegardee de playername" + Instance.playerName.text);
 
     }
     public void LoadPlayerInfo()
@@ -47,7 +58,8 @@ public class MainManager2 : MonoBehaviour
         {
             string json = File.ReadAllText(path);
             SaveData data = JsonUtility.FromJson<SaveData>(json);
-            playerName.text = data.playerName;
+            playerName = data.playerName;
+            playerBestScore = data.playerBestScore;
         }
 
     }

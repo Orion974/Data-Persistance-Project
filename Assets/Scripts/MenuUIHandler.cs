@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System.IO;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -14,20 +15,35 @@ using UnityEditor;
 public class MenuUIHandler : MonoBehaviour
 {
 
-    public TextMeshProUGUI playerName;
+    public TextMeshProUGUI playerName3;
+
     private void Start()
     {
-
+        MainManager2.Instance.LoadPlayerInfo();
     }
+
     public void StartNew()
     {
-        MainManager2.Instance.playerName.text = playerName.text;
+
+          
+        Debug.Log("Valeur actuelle de playername" + MainManager2.Instance.GetPlayerName());
+        Debug.Log("Valeur actuelle de playername" + playerName3.text);
+
+        if (MainManager2.Instance.GetPlayerName() != playerName3.text)
+        {
+            Debug.Log("Je suis appliqué");
+            MainManager2.Instance.playerBestScore = 0;
+            MainManager2.Instance.SetPlayerName(playerName3.text);
+            MainManager2.Instance.SavePlayerInfo();
+        }
+        else MainManager2.Instance.SavePlayerInfo();
         SceneManager.LoadScene(1);
+
     }
 
     public void Exit()
     {
-       // MainManager.Instance.SaveColor();
+        MainManager2.Instance.SavePlayerInfo();
 #if UNITY_EDITOR
         EditorApplication.ExitPlaymode();
 #else
