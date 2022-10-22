@@ -10,11 +10,12 @@ public class MainManager2 : MonoBehaviour
     public static MainManager2 Instance;
     public TextMeshProUGUI playerName;
 
+    public int playerBestScore;
 
     private void Awake()
     {
-
-        playerName.text = "toto";
+        playerBestScore = 0;
+        
         if (Instance != null)
         {
             Destroy(gameObject);

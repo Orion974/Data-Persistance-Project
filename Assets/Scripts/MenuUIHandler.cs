@@ -21,17 +21,10 @@ public class MenuUIHandler : MonoBehaviour
     }
     public void StartNew()
     {
-        Debug.Log(MainManager2.Instance.playerName.text);
-        Debug.Log(" ");
-        Debug.Log(playerName.text);
         MainManager2.Instance.playerName.text = playerName.text;
         SceneManager.LoadScene(1);
     }
-    public void SetName()
-    {
-        //playerName.text = 
 
-    }
     public void Exit()
     {
        // MainManager.Instance.SaveColor();
