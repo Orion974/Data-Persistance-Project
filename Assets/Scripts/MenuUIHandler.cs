@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -12,15 +13,24 @@ using UnityEditor;
 [DefaultExecutionOrder(1000)]
 public class MenuUIHandler : MonoBehaviour
 {
-    
 
+    public TextMeshProUGUI playerName;
     private void Start()
     {
 
     }
     public void StartNew()
     {
+        Debug.Log(MainManager2.Instance.playerName.text);
+        Debug.Log(" ");
+        Debug.Log(playerName.text);
+        MainManager2.Instance.playerName.text = playerName.text;
         SceneManager.LoadScene(1);
+    }
+    public void SetName()
+    {
+        //playerName.text = 
+
     }
     public void Exit()
     {
